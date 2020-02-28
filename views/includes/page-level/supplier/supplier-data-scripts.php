@@ -1,0 +1,1 @@
+<script src="<?=BASEASSETS;?>js/pages/supplier/supplier-data.js"></script>

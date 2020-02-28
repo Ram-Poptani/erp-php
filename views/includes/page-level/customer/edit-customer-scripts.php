@@ -1,0 +1,1 @@
+<script src="<?=BASEASSETS;?>js/pages/customer/edit-customer.js"></script>
