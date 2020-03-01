@@ -15,7 +15,8 @@ class Validator{
         'unique',
         'uniqueUpdate',
         'email',
-        'phone'
+        'phone',
+        'gender'
     ];
 
     protected $messages = [
@@ -25,7 +26,8 @@ class Validator{
         'email' => 'This is not a valid email address',
         'unique' => 'That :field is already taken',
         'uniqueUpdate' => 'That :field is already taken',
-        'phone' => 'This is not a valid phone address'
+        'phone' => 'This is not a valid phone number',
+        'gender' => 'This is not a valid gender'
     ];
 
     public function __construct($di){
@@ -70,14 +72,17 @@ class Validator{
     public function maxlength($field, $value, $satisfier){
         return mb_strlen($value) <= $satisfier;
     }
-    public function unique($field, $value, $satisfier){
+    public function unique($field, $value, $satisfier) {
+        if ( isset( $this->data['update'] ) && $this->data['update'] == true ) {
+           return $this->uniqueUpdate($field, $value, $satisfier);
+        }
         return !$this->database->exists($satisfier, [$field=>$value]);
     }
-    public function uniqueUpdate($field, $value, $satisfier){
+    public function uniqueUpdate($field, $value, $satisfier) {
         // echo " hello ";
         if ( $this->data[$field] ) {
             // Util::dd( $this->data );
-            return $this->database->existsUpdate($satisfier, [
+            return !$this->database->existsUpdate($satisfier, [
                 'id' => $this->data['id'],
                 $field => $value
                 ]);
@@ -87,18 +92,22 @@ class Validator{
         // return 1;
 
     }
-    public function email($field, $value, $satisfier){
+    public function email($field, $value, $satisfier) {
+        Util::dd( ["hello", $field, $value, $satisfier] );
         return filter_var($value, FILTER_VALIDATE_EMAIL);
     }
-    public function phone($field, $value, $satisfier){
+    public function gender($field, $value, $satisfier) {
+        return $value == 'Male' || $value == 'Female';
+    }
+    public function phone($field, $value, $satisfier) {
         return strlen(preg_replace('/^[0-9]{10}/', '', $value)) == 10;
     }
 
-    public function fails(){
+    public function fails() {
         return $this->errorHandler->hasErrors();
     }
 
-    public function errors(){
+    public function errors() {
         return $this->errorHandler;
     }
 }

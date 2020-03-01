@@ -30,18 +30,18 @@ class Customer {
             ],
             'gst_no' => [
                 'required' => true,
-                'uniqueUpdate' => $this->table
+                'unique' => $this->table
                
             ],
             'phone_no' => [
                 'required' => true,
-                'uniqueUpdate' => $this->table
+                'unique' => $this->table
             ],
             'email_id' => [
                 'required' => true,
                 'minlength' => 2,
                 'maxlength' => 255,
-                'uniqueUpdate' => $this->table
+                'unique' => $this->table
             ],
             'gender'=>[
                 'required'=>true

@@ -43,7 +43,7 @@ if(Session::hasSession('old'))
 
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Customer</h1>
-            <a href="<?= BASEPAGES; ?>manage-customer.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <a href="<?= BASEPAGES; ?>manage-customers.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
               <i class="fa fa-list-ul fa-sm text-white-75"></i> Manage Customer
             </a>
           </div>
@@ -148,7 +148,7 @@ if(Session::hasSession('old'))
                           <label for="gender">Gender</label>
                           
                           <select class="custom-select <?= $errors!='' && $errors->has('gender') ? 'error' : '';?>" id="gender" name="gender">
-                            <option selected>Select Gender</option>
+                            <option selected value ="Not Specified">Select Gender</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                           </select>

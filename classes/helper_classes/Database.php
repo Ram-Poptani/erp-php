@@ -133,9 +133,9 @@ class Database{
     }
 
     public function existsUpdate($table, $data){
-        Util::dd( [$table, $data] );
+        // Util::dd( [$table, $data] );
         $field = array_keys($data)[0];
-    // Util::dd($table);
+        // Util::dd($field);
         $result = $this->readData($table, [], "{$field} = '{$data[$field]}'", PDO::FETCH_ASSOC);
         // Util::dd($result);
         return count( $result ) > 0;
