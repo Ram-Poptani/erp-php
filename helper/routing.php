@@ -419,6 +419,47 @@ if (isset($_POST['delete_supplier'])) {
  * *******************************************EMPLOYEE*******************************************
  */
 
+if(isset($_POST['add_employee'])) {
+    // Util::dd($_POST);
+    //USER HAS REQUESTED TO ADD A NEW CATEGORY
+    // Util::dd(Util::verifyCSRFToken($_POST));
+    if(isset($_POST['csrf_token']) && Util::verifyCSRFToken($_POST))
+    {
+        // $_POST["hello"] = "world";
+        // Util::dd($_POST);
+        $result = $di->get('employee')->addEmployee($_POST);
+        // Util::dd($result);
+
+        switch($result)
+        {
+            case ADD_ERROR:
+
+                // $_POST["ADD_ERROR"] = "ADD_ERROR";
+                // Util::dd($_POST);
+                Session::setSession(ADD_ERROR, 'There was problem while inserting record, please try again later!');
+                Util::redirect('manage-employees.php');
+            break;
+
+            case ADD_SUCCESS:
+                // $_POST["ADD_SUCCESS"] = "ADD_SUCCESS";
+                // Util::dd($_POST);
+                Session::setSession(ADD_SUCCESS, 'The record have been added successfully!');
+                // Util::dd();
+                Util::redirect('manage-employees.php');
+            break;
+            
+            case VALIDATION_ERROR:
+                // $_POST["VALIDATION_ERROR"] = "VALIDATION_ERROR";
+                // Util::dd($_POST);
+                Session::setSession(VALIDATION_ERROR, 'There was some problem in validating your data at server side');
+                Session::setSession('errors', serialize($di->get('validator')->errors()));
+                Session::setSession('old', $_POST);
+                Util::redirect('add-employee.php');
+            break;
+        }
+    }
+}
+
 if (isset($_POST['page']) && $_POST['page'] == 'manage_employee') {
     // Util::dd(["post" , $_POST]);
     $search_parameter = $_POST['search']['value'] ?? null;
@@ -427,6 +468,38 @@ if (isset($_POST['page']) && $_POST['page'] == 'manage_employee') {
     $length =  $_POST['length'];
     $draw =  $_POST['draw'];
     $di->get("employee")->getJSONDataForDataTable($draw, $search_parameter, $order_by, $start, $length);
+}
+
+if (isset($_POST['delete_employee'])) {
+    // Util::dd([
+    //     "csrf" => Session::getSession("csrf_token"),
+    //     $_POST
+    //     ]);
+
+    if (isset($_POST['csrf_token']) && Util::verifyCSRFToken($_POST)) {
+        // Util::dd("hello");
+        // Util::dd($_POST);
+        $result = $di->get('employee')->delete($_POST['record_id']);
+        // Util::dd($result);
+
+        switch($result)
+        {
+            case DELETE_ERROR:
+                $_POST["DELETE_ERROR"] = "DELETE_ERROR";
+                // Util::dd($_POST);
+                Session::setSession(DELETE_ERROR, 'There was problem while deleteing record, please try again later!');
+                Util::redirect('manage-employees.php');
+            break;
+
+            case DELETE_SUCCESS:
+                $_POST["DELETE_SUCCESS"] = "DELETE_SUCCESS";
+                // Util::dd($_POST);
+                Session::setSession(DELETE_SUCCESS, 'The record have been deleted successfully!');
+                // Util::dd();
+                Util::redirect('manage-employees.php');
+            break;
+        }
+    }
 }
 /**
  * *******************************************END OF EMPLOYEE*******************************************

@@ -27,7 +27,7 @@ $sidebarSubSection = "manage";
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Employee</h1>
             <a href="<?= BASEPAGES;?>add-employee.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-              <i class="fa fa-plus fa-sm text-white-75"></i> Manage Employee
+              <i class="fa fa-plus fa-sm text-white-75"></i> Add Employee
             </a>
           </div>
           <!--
@@ -93,11 +93,11 @@ $sidebarSubSection = "manage";
           <div class="modal-body">
             <input type="hidden" name="csrf_token" id="csrf_token" value="<?= Session::getSession('csrf_token');?>">
             <input type="hidden" name="record_id" id="record_id">
-            <p>Are you sure you want to delete this supplier?</p>
+            <p>Are you sure you want to delete this Employee?</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-danger" name="delete_supplier">Delete</button>
+            <button type="submit" class="btn btn-danger" name="delete_employee">Delete</button>
           </div>
         </form>
       </div>

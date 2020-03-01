@@ -77,6 +77,7 @@ class Employee {
      * This function is responsible to accept the data from the Routing and add it to the Database.
      */
     public function addEmployee($data) {
+        // Util::dd($data);
         $validation = $this->validateData($data);
         if(!$validation->fails())
         {
@@ -106,7 +107,7 @@ class Employee {
                     'gender' => $data['gender'],
                     'address_id' => $address_id
                 ];
-                // $employee_id = $this->database->insert($this->table, $employee_data);
+                $employee_id = $this->database->insert($this->table, $employee_data);
                 // Util::dd([$employee_id]);
                 // Util::dd([$address_id]);
                 

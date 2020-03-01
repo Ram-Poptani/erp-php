@@ -53,7 +53,7 @@ class Validator{
     }
 
     public function validate($item){
-        // $item['field'] == 'phone_no' ? Util::dd( $item ) : 0;
+        // Util::dd( $item );
         $field = $item['field'];
         foreach ($item['rules'] as $rule => $satisfier) {
             if (!call_user_func_array([$this, $rule], [$field, $item['value'], $satisfier])) {

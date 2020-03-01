@@ -18,8 +18,8 @@ var TableDataTables = function(){
                 }
             },
             "lengthMenu": [
-                [3, 5, 7, 10, 12, 20, -1],
-                [3, 5, 7, 10, 12, 20, "All"]
+                [5, 7, 10, 12, 20, -1],
+                [5, 7, 10, 12, 20, "All"]
             ],
             "order": [
                 [0, "ASC"]

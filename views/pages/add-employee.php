@@ -60,27 +60,251 @@ if(Session::hasSession('old'))
                 <div class="card-body">
                   <div class="col-md-12">
 
-                    <form action="<?=BASEURL;?>helper/routing.php" method="POST" id="add-employee">
+                  <form action="<?=BASEURL;?>helper/routing.php" method="POST" id="add-employee">
                       <input type="hidden" name="csrf_token" value="<?= Session::getSession('csrf_token');?>">
-                      <!--FORM GROUP-->
-                      <div class="form-group">
-                        <label for="name">Employee Name</label>
-                        <input  type="text" 
-                                name="name" 
-                                id="name" 
-                                class="form-control <?= $errors!='' && $errors->has('name') ? 'error' : '';?>"
-                                placeholder = "Enter Employee Name"
-                                value="<?=$old != '' && isset($old['name']) ?$old['name']: '';?>"/>
-                        <?php
-                          if($errors!="" && $errors->has('name'))
-                          {
-                            echo "<span class='error'>{$errors->first('name')}</span>";
-                          }
-                        ?>
+
+                      <div class="form-row">
+
+                        <!--FORM GROUP first_name-->
+                        <div class="form-group col-md-6">
+                          <label for="first_name">First Name</label>
+                          <input  type="text" 
+                                  name="first_name" 
+                                  id="first_name" 
+                                  class="form-control <?= $errors!='' && $errors->has('first_name') ? 'error' : '';?>"
+                                  placeholder = "Enter First Name"
+                                  value="<?=$old != '' && isset($old['first_name']) ?$old['first_name']: '';?>"/>
+                          <?php
+                            if($errors!="" && $errors->has('first_name'))
+                            {
+                              echo "<span class='error'>{$errors->first('first_name')}</span>";
+                            }
+                          ?>
+                        </div>
+                        <!--/FORM GROUP first_name-->
+
+                        <!--FORM GROUP last_name-->
+                        <div class="form-group col-md-6">
+                          <label for="last_name">Last Name</label>
+                          <input  type="text" 
+                                  name="last_name" 
+                                  id="last_name" 
+                                  class="form-control <?= $errors!='' && $errors->has('last_name') ? 'error' : '';?>"
+                                  placeholder = "Enter Last Name"
+                                  value="<?=$old != '' && isset($old['last_name']) ?$old['last_name']: '';?>"/>
+                          <?php
+                            if($errors!="" && $errors->has('last_name'))
+                            {
+                              echo "<span class='error'>{$errors->first('last_name')}</span>";
+                            }
+                          ?>
+                        </div>
+                        <!--/FORM GROUP last_name-->
                       </div>
-                      <!--/FORM GROUP-->
+
+                      <div class="form-row">
+                        <!--FORM GROUP phone_no-->
+                        <div class="form-group col-md-6">
+                          <label for="phone_no">Phone</label>
+                          <input  type="text" 
+                                  name="phone_no" 
+                                  id="phone_no" 
+                                  class="form-control <?= $errors!='' && $errors->has('phone_no') ? 'error' : '';?>"
+                                  placeholder = "Enter Phone No"
+                                  value="<?=$old != '' && isset($old['phone_no']) ?$old['phone_no']: '';?>"/>
+                          <?php
+                            if($errors!="" && $errors->has('phone_no'))
+                            {
+                              echo "<span class='error'>{$errors->first('phone_no')}</span>";
+                            }
+                          ?>
+                        </div>
+                        <!--/FORM GROUP phone_no-->
+
+
+                        <!--FORM GROUP email_id-->
+                        <div class="form-group col-md-6">
+                          <label for="email_id">Email</label>
+                          <input  type="email" 
+                                  name="email_id" 
+                                  id="email_id" 
+                                  class="form-control <?= $errors!='' && $errors->has('email_id') ? 'error' : '';?>"
+                                  placeholder = "Enter Email"
+                                  value="<?=$old != '' && isset($old['email_id']) ?$old['email_id']: '';?>"/>
+                          <?php
+                            if($errors!="" && $errors->has('email_id'))
+                            {
+                              echo "<span class='error'>{$errors->first('email_id')}</span>";
+                            }
+                          ?>
+                        </div>
+                        <!--/FORM GROUP email_id-->
+                      </div>
+
+                      <div class="form-row">
+
+
+                        <!--FORM GROUP gender-->
+                        <div class="form-group col-md-6">
+                          <label for="gender">Gender</label>
+                          
+                          <select class="custom-select <?= $errors!='' && $errors->has('gender') ? 'error' : '';?>" id="gender" name="gender">
+                            <option selected value ="Not Specified">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                          </select>
+                          <?php
+                            if($errors!="" && $errors->has('gender'))
+                            {
+                              echo "<span class='error'>{$errors->first('gender')}</span>";
+                            }
+                          ?>
+                        </div>
+                        <!--/FORM GROUP gender-->
+                      </div>
+                      
+                      <label for="">Address:</label>
+                      <div class="form-row">
+                        <!--FORM GROUP block_no-->
+                        <div class="form-group col-md-6">
+                          <label for="block_no">Block No</label>
+                          <input  type="text" 
+                                  name="block_no" 
+                                  id="block_no" 
+                                  class="form-control <?= $errors!='' && $errors->has('block_no') ? 'error' : '';?>"
+                                  placeholder = "Enter Block No"
+                                  value="<?=$old != '' && isset($old['block_no']) ?$old['block_no']: '';?>"/>
+                          
+                          <?php
+                            if($errors!="" && $errors->has('block_no'))
+                            {
+                              echo "<span class='error'>{$errors->first('block_no')}</span>";
+                            }
+                          ?>
+                        </div>
+                        <!--/FORM GROUP block_no-->
+
+
+                        <!--FORM GROUP street-->
+                        <div class="form-group col-md-6">
+                          <label for="street">Street</label>
+                          <input  type="text" 
+                                  name="street" 
+                                  id="street" 
+                                  class="form-control <?= $errors!='' && $errors->has('street') ? 'error' : '';?>"
+                                  placeholder = "Enter Street"
+                                  value="<?=$old != '' && isset($old['street']) ?$old['street']: '';?>"/>
+                          <?php
+                            if($errors!="" && $errors->has('street'))
+                            {
+                              echo "<span class='error'>{$errors->first('street')}</span>";
+                            }
+                          ?>
+                        </div>
+                        <!--/FORM GROUP street-->
+                      </div>
+
+                      <div class="form-row">
+                        <!--FORM GROUP city-->
+                        <div class="form-group col-md-6">
+                          <label for="city">City</label>
+                          <input  type="text" 
+                                  name="city" 
+                                  id="city" 
+                                  class="form-control <?= $errors!='' && $errors->has('city') ? 'error' : '';?>"
+                                  placeholder = "Enter City"
+                                  value="<?=$old != '' && isset($old['city']) ?$old['city']: '';?>"/>
+                          <?php
+                            if($errors!="" && $errors->has('city'))
+                            {
+                              echo "<span class='error'>{$errors->first('city')}</span>";
+                            }
+                          ?>
+                        </div>
+                        <!--/FORM GROUP city-->
+
+                        <!--FORM GROUP pincode-->
+                        <div class="form-group col-md-6">
+                          <label for="pincode">Pincode</label>
+                          <input  type="text" 
+                                  name="pincode" 
+                                  id="pincode" 
+                                  class="form-control <?= $errors!='' && $errors->has('pincode') ? 'error' : '';?>"
+                                  placeholder = "Enter Pincode"
+                                  value="<?=$old != '' && isset($old['pincode']) ?$old['pincode']: '';?>"/>
+                          
+                          <?php
+                            if($errors!="" && $errors->has('pincode'))
+                            {
+                              echo "<span class='error'>{$errors->first('pincode')}</span>";
+                            }
+                          ?>
+                        </div>
+                        <!--/FORM GROUP pincode-->
+                      </div>
+
+                      <div class="form-row">
+                        <!--FORM GROUP state-->
+                        <div class="form-group col-md-6">
+                          <label for="state">State</label>
+                          <input  type="text" 
+                                  name="state" 
+                                  id="state" 
+                                  class="form-control <?= $errors!='' && $errors->has('state') ? 'error' : '';?>"
+                                  placeholder = "Enter State"
+                                  value="<?=$old != '' && isset($old['state']) ?$old['state']: '';?>"/>
+                          <?php
+                            if($errors!="" && $errors->has('state'))
+                            {
+                              echo "<span class='error'>{$errors->first('state')}</span>";
+                            }
+                          ?>
+                        </div>
+                        <!--/FORM GROUP state-->
+
+                        <!--FORM GROUP country-->
+                        <div class="form-group col-md-6">
+                          <label for="country">Country</label>
+                          <input  type="text" 
+                                  name="country" 
+                                  id="country" 
+                                  class="form-control <?= $errors!='' && $errors->has('country') ? 'error' : '';?>"
+                                  placeholder = "Enter Country"
+                                  value="<?=$old != '' && isset($old['country']) ?$old['country']: '';?>"/>
+                          
+                          <?php
+                            if($errors!="" && $errors->has('country'))
+                            {
+                              echo "<span class='error'>{$errors->first('country')}</span>";
+                            }
+                          ?>
+                        </div>
+                        <!--/FORM GROUP country-->
+                      </div>
+
+                      <div class="form-row">
+                        <!--FORM GROUP town-->
+                        <div class="form-group col-md-6">
+                          <label for="town">Town</label>
+                          <input  type="text" 
+                                  name="town" 
+                                  id="town" 
+                                  class="form-control <?= $errors!='' && $errors->has('town') ? 'error' : '';?>"
+                                  placeholder = "Enter Town"
+                                  value="<?=$old != '' && isset($old['town']) ?$old['town']: '';?>"/>
+                          <?php
+                            if($errors!="" && $errors->has('town'))
+                            {
+                              echo "<span class='error'>{$errors->first('town')}</span>";
+                            }
+                          ?>
+                        </div>
+                        <!--/FORM GROUP town-->
+                      </div>
+
+
                       <button type="submit" class="btn btn-primary" name="add_employee" value="addEmployee"><i class="fa fa-check"></i> Submit</button>
-                    </form>
+</form>
 
                   </div>
                 </div>
