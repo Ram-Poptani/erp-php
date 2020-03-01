@@ -15,3 +15,4 @@ require_once "$app/../classes/helper_classes/Util.php";
 require_once "$app/../classes/Category.php";
 require_once "$app/../classes/Customer.php";
 require_once "$app/../classes/Supplier.php";
+require_once "$app/../classes/Employee.php";

@@ -13,6 +13,7 @@ $di->set("util", new Util($di));
 $di->set("category", new Category($di));
 $di->set("customer", new Customer($di));
 $di->set("supplier", new Supplier($di));
+$di->set("employee", new Employee($di));
 
 
 require_once "constants.php";

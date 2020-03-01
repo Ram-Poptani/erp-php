@@ -409,3 +409,25 @@ if (isset($_POST['delete_supplier'])) {
         }
     }
 }
+
+/**
+ * *******************************************END OF SUPPLIER*******************************************
+ */
+
+
+ /**
+ * *******************************************EMPLOYEE*******************************************
+ */
+
+if (isset($_POST['page']) && $_POST['page'] == 'manage_employee') {
+    // Util::dd(["post" , $_POST]);
+    $search_parameter = $_POST['search']['value'] ?? null;
+    $order_by = $_POST['order'] ?? null;
+    $start =  $_POST['start'];
+    $length =  $_POST['length'];
+    $draw =  $_POST['draw'];
+    $di->get("employee")->getJSONDataForDataTable($draw, $search_parameter, $order_by, $start, $length);
+}
+/**
+ * *******************************************END OF EMPLOYEE*******************************************
+ */
