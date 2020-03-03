@@ -29,11 +29,21 @@ class Util
     public static function verifyCSRFToken($data){
 
         // Util::dd( [
-        //     $data['csrf_token'], 
-        //     Session::getSession( 'csrf_token' )
+        //     $data, 
+        //     isset($data['csrf_token']),
+        //     $data['csrf_token'] == Session::getSession('csrf_token'),
+        //     Session::getSession('token_expire') > time()
         //     ]);
 
-        return (isset($data['csrf_token']) && Session::getSession('csrf_token') != null && $data['csrf_token'] == Session::getSession('csrf_token') && Session::getSession('token_expire') > time());
+        return (
+            isset($data['csrf_token']) 
+                && 
+            Session::getSession('csrf_token') != null 
+                && 
+            $data['csrf_token'] == Session::getSession('csrf_token') 
+                && 
+            Session::getSession('token_expire') > time()
+        );
     }
 }
 ?>

@@ -1,0 +1,1 @@
+<script src="<?=BASEASSETS;?>js/pages/product/add-product.js"></script>

@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../../helper/init.php';
-$pageTitle = "Easy ERP | Manage Employee";
-$sidebarSection = "employee";
+$pageTitle = "Easy ERP | Manage Product";
+$sidebarSection = "products";
 $sidebarSubSection = "manage";
 Util::createCSRFToken();
 ?>
@@ -26,11 +26,11 @@ Util::createCSRFToken();
         <!-- Begin Page Content -->
         <div class="container-fluid">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Employee</h1>
-            <a href="<?= BASEPAGES;?>add-employee.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-              <i class="fa fa-plus fa-sm text-white-75"></i> Add Employee
+            <h1 class="h3 mb-0 text-gray-800">Product</h1>
+            <a href="<?= BASEPAGES;?>add-product.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+              <i class="fa fa-plus fa-sm text-white-75"></i> Add Product
             </a>
-          </div>
+        </div>
           <!--
           
           YOUR
@@ -42,21 +42,23 @@ Util::createCSRFToken();
 
           -->
 
-          <!--MANAGE EMPLOYEE DATATABLE-->
+          <!--MANAGE SUPPLIER DATATABLE-->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Manage Employees</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Manage Products</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-bordered" id="manage-employee-datatable" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="manage-product-datatable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Employee Name</th>
-                      <th>Email</th>                      
-                      <th>Phone</th>
-                      <th>Gender</th>
-                      <th>Address</th>
+                      <th>Product Name</th>
+                      <th>Specification</th>
+                      <th>Category</th>
+                      <th>Selling Price</th>
+                      <th>Quantity</th>
+                      <th>EOQ Level</th>
+                      <th>Danger Level</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
@@ -80,6 +82,9 @@ Util::createCSRFToken();
   <!-- End of Page Wrapper -->
 
 
+
+
+
   <!--DELETE MODAL-->
   <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -94,11 +99,11 @@ Util::createCSRFToken();
           <div class="modal-body">
             <input type="hidden" name="csrf_token" id="csrf_token" value="<?= Session::getSession('csrf_token');?>">
             <input type="hidden" name="record_id" id="record_id">
-            <p>Are you sure you want to delete this Employee?</p>
+            <p>Are you sure you want to delete this product?</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-danger" name="delete_employee">Delete</button>
+            <button type="submit" class="btn btn-danger" name="delete_product">Delete</button>
           </div>
         </form>
       </div>
@@ -106,12 +111,13 @@ Util::createCSRFToken();
   </div>
   <!--/DELETE MODAL-->
 
+
   <?php
   require_once(__DIR__ . "/../includes/scroll-to-top.php");
   ?>
   <?php require_once(__DIR__."/../includes/core-scripts.php");?>
   <!--PAGE LEVEL SCRIPTS-->
-  <?php require_once(__DIR__."/../includes/page-level/employee/manage-employee-scripts.php");?>
+  <?php require_once(__DIR__."/../includes/page-level/product/manage-product-scripts.php");?>
 
 
 </body>

@@ -119,6 +119,20 @@ class Category{
         return $result;
     }
 
+    public function getIdByCategory($categoryName, $mode = PDO::FETCH_OBJ){
+        $categoryName = strtolower( $categoryName );
+        $query = "SELECT * FROM {$this->table} WHERE deleted = 0 AND name LIKE '%{$categoryName}%'";
+        // Util::dd( $query );
+        $result = $this->database->raw($query, $mode);
+        return $result[0]->id;
+    }
+
+    public function getCategoriesName($mode = PDO::FETCH_OBJ){
+        $query = "SELECT `{$this->table}`.name FROM {$this->table} WHERE deleted = 0 ";
+        $result = $this->database->raw($query, $mode);
+        return $result;
+    }
+
     public function update($data, $id){
         $validationData['name'] = $data['category_name'];
         $validation = $this->validateData($validationData);

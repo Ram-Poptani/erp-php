@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
 
 <!-- Sidebar - Brand -->
 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?=BASEPAGES;?>index.php">
@@ -79,9 +79,9 @@
   </a>
   <div id="collapseProduct" class="collapse <?= $sidebarSection == 'products' ? 'show' : '';?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
     <div class="bg-white py-2 collapse-inner rounded">
-      <a class="collapse-item"  href="<?=BASEPAGES;?>manage-products.php">Manage Products</a>
-      <a class="collapse-item"  href="<?=BASEPAGES;?>check-current-activity.php">Check Current Inventory</a>
-      <a class="collapse-item " href="<?=BASEPAGES;?>add-product.php">Add Product</a>
+      <a class="collapse-item <?= $sidebarSubSection == 'manage' ? 'active' : '';?>"  href="<?=BASEPAGES;?>manage-products.php">Manage Products</a>
+      <a class="collapse-item"  href="<?=BASEPAGES;?>check-current-inventory.php">Check Current Inventory</a>
+      <a class="collapse-item <?= $sidebarSubSection == 'add' ? 'active' : '';?>" href="<?=BASEPAGES;?>add-product.php">Add Product</a>
     </div>
   </div>
 </li>
