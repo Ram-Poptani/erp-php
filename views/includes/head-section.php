@@ -12,5 +12,10 @@
 
   <!-- Custom styles for this template-->
   <link href="<?=BASEASSETS;?>css/sb-admin-2.css" rel="stylesheet">
+  
+  <!-- Theme css -->
   <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.css">
+
+  <!-- Customized styles for this template-->
+  <link href="<?=BASEASSETS;?>css/styles.css" rel="stylesheet">
 

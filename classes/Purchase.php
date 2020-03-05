@@ -2,8 +2,8 @@
 
 require_once __DIR__."/../helper/requirements.php";
 
-class Product {
-    private $table = "products";
+class Purchase {
+    private $table = "purchases";
     private $database;
     protected $di;
     
@@ -47,7 +47,7 @@ class Product {
     /**
      * This function is responsible to accept the data from the Routing and add it to the Database.
      */
-    public function addProduct($data) {
+    public function addPurchase($data) {
         // Util::dd( $data );
         $validation = $this->validateData($data);
         // Util::dd( !$validation->fails() );
@@ -57,7 +57,7 @@ class Product {
             // Util::dd( "Validation was successful" );
             try
             {
-                // Util::dd(["product", $data]);
+                // Util::dd(["purchase", $data]);
                 //Begin Transaction
                 $this->database->beginTransaction();
 
@@ -65,7 +65,7 @@ class Product {
                 $category_id = $this->di->get('category')->getIdByCategory( $data['category'] );
                 // Util::dd( $category_id );
 
-                $product_data = [
+                $purchase_data = [
                     'name' => $data['name'],
                     'specification' => $data['specification'],
                     'hsn_code' => $data['hsn_code'],
@@ -74,15 +74,15 @@ class Product {
                     'danger_level' => $data['danger_level'],
                     'quantity' => $data['quantity'],
                 ];
-                $product_id = $this->database->insert($this->table, $product_data);
-                // Util::dd( $product_id );
-                $product_selling_rate = [
+                $purchase_id = $this->database->insert($this->table, $purchase_data);
+                // Util::dd( $purchase_id );
+                $purchase_selling_rate = [
                     'selling_rate' => $data['selling_rate'],
-                    'product_id' => $product_id
+                    'purchase_id' => $purchase_id
                 ];
-                $this->database->insert('products_selling_rate', $product_selling_rate);
+                $this->database->insert('purchases_selling_rate', $purchase_selling_rate);
 
-                // Util::dd($product_data);
+                // Util::dd($purchase_data);
 
 
                 $this->database->commit();
@@ -103,15 +103,15 @@ class Product {
 
     public function getJSONDataForDataTable($draw, $searchParameter, $orderBy, $start, $length) {
         
-        $columns = ["name", "specification", "category", "selling_rate", "quantity", "eoq_level", "danger_level"];
+        $columns = ["product_name", "supplier_name", "purchase_rate", "quantity", "created_at"];
 
         $totalRowCountQuery = "SELECT COUNT(id) as total_count FROM {$this->table} WHERE deleted = 0";
 
-        // Util::dd($totalRowCountQuery);
+        Util::dd($totalRowCountQuery);
 
-        $filteredRowCountQuery = "SELECT COUNT(`{$this->table}`.id) AS filtered_total_count FROM `{$this->table}`, `category` WHERE `{$this->table}`.category_id = `category`.id  AND  `{$this->table}`.deleted = 0";
+        $filteredRowCountQuery = "SELECT COUNT(`{$this->table}`.id) AS filtered_total_count FROM `{$this->table}`, `products`, `suppliers` WHERE `{$this->table}`.product_id = `products`.id AND `{$this->table}`.supplier_id = `suppliers`.id  AND  `{$this->table}`.deleted = 0";
 
-        // Util::dd($filteredRowCountQuery);
+        Util::dd($filteredRowCountQuery);
 
         $query = "
             SELECT 
@@ -122,13 +122,13 @@ class Product {
                 `{$this->table}`.danger_level,  
                 `{$this->table}`.eoq_level, 
                 `category`.name AS 'category_name', 
-                `products_selling_rate`.selling_rate
+                `purchases_selling_rate`.selling_rate
             FROM 
-                `{$this->table}`, `category`, `products_selling_rate` 
+                `{$this->table}`, `category`, `purchases_selling_rate` 
             WHERE 
                 `{$this->table}`.category_id = `category`.id 
                     AND 
-                    `products_selling_rate`.product_id = `{$this->table}`.id 
+                    `purchases_selling_rate`.purchase_id = `{$this->table}`.id 
                     AND 
                 `{$this->table}`.deleted = 0 
                     AND
@@ -317,7 +317,7 @@ class Product {
         return $filteredData;
     }
 
-    public function getProductWithCategory($id, $readMode = PDO::FETCH_OBJ) {
+    public function getPurchaseWithCategory($id, $readMode = PDO::FETCH_OBJ) {
 
         $query = "
             SELECT 
@@ -346,8 +346,8 @@ class Product {
         echo json_encode($filteredData);
     }
 
-    public function getProductById($productId, $mode = PDO::FETCH_OBJ) {
-        $query = "SELECT * FROM {$this->table} WHERE deleted = 0 AND id = {$productId}";
+    public function getPurchaseById($purchaseId, $mode = PDO::FETCH_OBJ) {
+        $query = "SELECT * FROM {$this->table} WHERE deleted = 0 AND id = {$purchaseId}";
         $result = $this->database->raw($query, $mode);
         return $result;
     }
@@ -358,7 +358,7 @@ class Product {
         $category_id = $this->di->get('category')->getIdByCategory( $data['category'] );
 
         $validationData['update'] = true;
-        $validationData['id'] = $data['product_id'];
+        $validationData['id'] = $data['purchase_id'];
         $validationData['name'] = $data['name'];
         $validationData['specification'] = $data['specification'];
         $validationData['hsn_code'] = $data['hsn_code'];
@@ -376,7 +376,7 @@ class Product {
                 //Begin Transaction
                 $this->database->beginTransaction();
 
-                $product_data = [
+                $purchase_data = [
                     'name' => $data['name'],
                     'specification' => $data['specification'],
                     'hsn_code' => $data['hsn_code'],
@@ -386,17 +386,17 @@ class Product {
                     'quantity' => $data['quantity']
                 ];
 
-                $filteredProductData['id'] = $data['product_id'];
-                $filteredProductData['name'] = $data['name'];
-                $filteredProductData['specification'] = $data['specification'];
-                $filteredProductData['hsn_code'] = $data['hsn_code'];
-                $filteredProductData['eoq_level'] = $data['eoq_level'];
-                $filteredProductData['danger_level'] = $data['danger_level'];
-                $filteredProductData['quantity'] = $data['quantity'];
-                $filteredProductData['category_id'] = $category_id;
+                $filteredPurchaseData['id'] = $data['purchase_id'];
+                $filteredPurchaseData['name'] = $data['name'];
+                $filteredPurchaseData['specification'] = $data['specification'];
+                $filteredPurchaseData['hsn_code'] = $data['hsn_code'];
+                $filteredPurchaseData['eoq_level'] = $data['eoq_level'];
+                $filteredPurchaseData['danger_level'] = $data['danger_level'];
+                $filteredPurchaseData['quantity'] = $data['quantity'];
+                $filteredPurchaseData['category_id'] = $category_id;
 
-                $this->database->update($this->table, $filteredProductData, "id = {$id}");
-                // Util::dd($this->database->update($this->table, $filteredProductData, "id = {$id}"));
+                $this->database->update($this->table, $filteredPurchaseData, "id = {$id}");
+                // Util::dd($this->database->update($this->table, $filteredPurchaseData, "id = {$id}"));
                 $this->database->commit();
                 return EDIT_SUCCESS;
             }

@@ -598,3 +598,18 @@ if (isset($_POST['delete_product'])) {
         }
     }
 }
+
+if ( isset( $_POST['page'] ) && isset( $_POST['for'] ) && $_POST['page'] == "check_current_inventory" && $_POST['for'] == "chart" ) {
+    echo json_encode( $di->get("product")->getJSONDataForChart() );
+}
+
+if ( isset( $_POST['page'] ) && isset( $_POST['for'] ) && $_POST['page'] == "check_current_inventory" && $_POST['for'] == "datatable" ) {
+    $search_parameter = $_POST['search']['value'] ?? null;
+    $order_by = $_POST['order'] ?? null;
+    $start =  $_POST['start'];
+    $length =  $_POST['length'];
+    $draw =  $_POST['draw'];
+    $di->get("product")->getJSONDataForQuantityTable($draw, $search_parameter, $order_by, $start, $length);
+}
+
+

@@ -212,13 +212,13 @@ class Customer {
             $baseurl = BASEPAGES;
             $subarray[] = 
             <<<BUTTONS
-            <button class="edit btn btn-outline-primary" id="{$filteredData[$i]->id}" data-toggle = "modal" data-target = "#editModal">
+            <button class="edit btn btn-outline-primary d-block" id="{$filteredData[$i]->id}" data-toggle = "modal" data-target = "#editModal">
                 <i class="fas fa-pencil-alt"></i>
             </button>
-            <button class="delete btn btn-outline-danger" id="{$filteredData[$i]->id}" data-toggle = "modal" data-target = "#deleteModal">
+            <button class="delete btn btn-outline-danger d-block" id="{$filteredData[$i]->id}" data-toggle = "modal" data-target = "#deleteModal">
                 <i class="fas fa-trash"></i>
             </button>
-            <button class="view btn btn-outline-success" id="{$filteredData[$i]->id}" >
+            <button class="view btn btn-outline-success d-block" id="{$filteredData[$i]->id}" >
                 <i class="fas fa-eye"></i>
             </button>
             BUTTONS;

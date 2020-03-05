@@ -92,12 +92,14 @@ class Category{
             $subarray[] = $filteredData[$i]->name;
             $subarray[] = 
             <<<BUTTONS
-            <button class="edit btn btn-outline-primary" id="{$filteredData[$i]->id}" data-toggle = "modal" data-target = "#editModal">
-                <i class="fas fa-pencil-alt"></i>
-            </button>
-            <button class="delete btn btn-outline-danger" id="{$filteredData[$i]->id}" data-toggle = "modal" data-target = "#deleteModal">
-                <i class="fas fa-trash"></i>
-            </button>
+            <div class= "d-flex">
+                <button class="edit btn btn-outline-primary" id="{$filteredData[$i]->id}" data-toggle = "modal" data-target = "#editModal">
+                    <i class="fas fa-pencil-alt"></i>
+                </button>
+                <button class="delete btn btn-outline-danger" id="{$filteredData[$i]->id}" data-toggle = "modal" data-target = "#deleteModal">
+                    <i class="fas fa-trash"></i>
+                </button>
+            <div>
             BUTTONS;
 
             $data[] = $subarray;

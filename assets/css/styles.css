@@ -1,0 +1,23 @@
+#content{
+    background-color: #222;
+}
+
+.text-gray-800{
+    color: #FFF !important;
+}
+
+.text-primary{
+    color: #ADB5BD !important;
+}
+
+.collapse-item{
+    color: #ADB5BD !important;
+}
+
+.collapse-item.active{
+    color: #4E73DF !important;
+}
+
+.d-block{
+    display: block !important; 
+}
