@@ -107,32 +107,28 @@ class Purchase {
 
         $totalRowCountQuery = "SELECT COUNT(id) as total_count FROM {$this->table} WHERE deleted = 0";
 
-        Util::dd($totalRowCountQuery);
+        // Util::dd($totalRowCountQuery);
 
         $filteredRowCountQuery = "SELECT COUNT(`{$this->table}`.id) AS filtered_total_count FROM `{$this->table}`, `products`, `suppliers` WHERE `{$this->table}`.product_id = `products`.id AND `{$this->table}`.supplier_id = `suppliers`.id  AND  `{$this->table}`.deleted = 0";
 
-        Util::dd($filteredRowCountQuery);
+        // Util::dd($filteredRowCountQuery);
 
         $query = "
             SELECT 
                 `{$this->table}`.id, 
-                `{$this->table}`.name, 
-                `{$this->table}`.specification, 
+                `products`.name AS product_name, 
+                CONCAT(`suppliers`.first_name, ' ', `suppliers`.last_name) AS supplier_name, 
+                `{$this->table}`.purchase_rate,  
                 `{$this->table}`.quantity,  
-                `{$this->table}`.danger_level,  
-                `{$this->table}`.eoq_level, 
-                `category`.name AS 'category_name', 
-                `purchases_selling_rate`.selling_rate
+                DATE_FORMAT(`{$this->table}`.created_at, '%d %b %Y') AS created_at
             FROM 
-                `{$this->table}`, `category`, `purchases_selling_rate` 
+                `{$this->table}`, `products`, `suppliers` 
             WHERE 
-                `{$this->table}`.category_id = `category`.id 
+                `{$this->table}`.product_id = `products`.id 
                     AND 
-                    `purchases_selling_rate`.purchase_id = `{$this->table}`.id 
+                `{$this->table}`.supplier_id = `suppliers`.id 
                     AND 
-                `{$this->table}`.deleted = 0 
-                    AND
-                `category`.deleted = 0";
+                `{$this->table}`.deleted = 0 ";
         
         // Util::dd($query);
 
@@ -140,24 +136,24 @@ class Purchase {
 
             $query .= " AND CONCAT(
                 
-                `{$this->table}`.name, 
-                `{$this->table}`.specification, 
-                `category`.id 
+                `products`.name, 
+                CONCAT(`suppliers`.first_name, ' ', `suppliers`.last_name), 
+                `{$this->table}`.created_at 
 
                 ) LIKE '%$searchParameter%'";
                 
             $filteredRowCountQuery .= " AND CONCAT(
                 
-                `{$this->table}`.name, 
-                `{$this->table}`.specification, 
-                `category`.id 
-                                
+                `products`.name,
+                CONCAT(`suppliers`.first_name, ' ', `suppliers`.last_name), 
+                `{$this->table}`.created_at 
+
                 ) LIKE '%$searchParameter%'";
         }   
         if ($orderBy != null) {
             $query .= " ORDER BY {$columns[$orderBy[0]['column']]} {$orderBy[0]['dir']}";
         }else {
-            $query .= " ORDER BY {$columns[3]} ASC";
+            $query .= " ORDER BY {$columns[4]} ASC";
         }
 
         if ($length != -1) {
@@ -178,28 +174,26 @@ class Purchase {
         $data = [];
         for ($i=0; $i < $numberOfRowsToDisplay; $i++) { 
             $subarray = [];
-            $subarray[] = $filteredData[$i]->name;
-            $subarray[] = $filteredData[$i]->specification;
-            $subarray[] = $filteredData[$i]->category_name;
-            $subarray[] = $filteredData[$i]->selling_rate;
+            $subarray[] = $filteredData[$i]->product_name;
+            $subarray[] = $filteredData[$i]->supplier_name;
+            $subarray[] = $filteredData[$i]->purchase_rate;
             $subarray[] = $filteredData[$i]->quantity;
-            $subarray[] = $filteredData[$i]->eoq_level;
-            $subarray[] = $filteredData[$i]->danger_level;
+            $subarray[] = $filteredData[$i]->created_at;
             $baseurl = BASEPAGES;
-            $subarray[] = 
-            <<<BUTTONS
-            <div class= "d-flex">
-                <button class="edit btn btn-outline-primary" id="{$filteredData[$i]->id}">
-                    <i class="fas fa-pencil-alt"></i>
-                </button>
-                <button class="delete btn btn-outline-danger" id="{$filteredData[$i]->id}" data-toggle = "modal" data-target = "#deleteModal">
-                    <i class="fas fa-trash"></i>
-                </button>
-                <button class="view btn btn-outline-success" id="{$filteredData[$i]->id}">
-                    <i class="fas fa-eye"></i>
-                </button>
-            <div>
-            BUTTONS;
+            // $subarray[] = 
+            // <<<BUTTONS
+            // <div class= "d-flex">
+            //     <button class="edit btn btn-outline-primary" id="{$filteredData[$i]->id}">
+            //         <i class="fas fa-pencil-alt"></i>
+            //     </button>
+            //     <button class="delete btn btn-outline-danger" id="{$filteredData[$i]->id}" data-toggle = "modal" data-target = "#deleteModal">
+            //         <i class="fas fa-trash"></i>
+            //     </button>
+            //     <button class="view btn btn-outline-success" id="{$filteredData[$i]->id}">
+            //         <i class="fas fa-eye"></i>
+            //     </button>
+            // <div>
+            // BUTTONS;
 
             $data[] = $subarray;
         }

@@ -1,12 +1,15 @@
 <!-- Sidebar -->
-<ul class="navbar-nav bg-dark sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-dark sidebar sidebar-dark accordion toggled" id="accordionSidebar">
 
 <!-- Sidebar - Brand -->
 <a id="brand-logo" class="sidebar-brand mx-3 d-flex align-items-center justify-content-left" href="<?=BASEPAGES;?>index.php">
   <div class="sidebar-brand-icon">
+    <img src="<?=BASEASSETS?>img/logo.svg" alt="" width = "40px">
+
     <!-- <i class="fa fa-pie-chart" aria-hidden="true"></i> -->
-    <img src="https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg.adapt.svg/1493030643828.svg" class=" image svg-image" alt="SAP">
+    <!-- <img src="https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg.adapt.svg/1493030643828.svg" class=" image svg-image" alt="SAP"> -->
   </div>
+  <div class="sidebar-brand-text mx-3">Quick ERP</div>
 </a>
 
 <!-- Divider -->
@@ -130,7 +133,7 @@
 
 <!-- Sidebar Toggler (Sidebar) -->
 <div class="text-center d-none d-md-inline">
-  <button class="rounded-circle border-0" id="sidebarToggle"></button>
+  <!-- <button class="rounded-circle border-0" id="sidebarToggle"></button> -->
 </div>
 
 </ul>

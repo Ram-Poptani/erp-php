@@ -613,3 +613,20 @@ if ( isset( $_POST['page'] ) && isset( $_POST['for'] ) && $_POST['page'] == "che
 }
 
 
+/**
+ * *******************************************END OF PRODUCT*******************************************
+ */
+
+ /**
+ * *******************************************PURCHASE*******************************************
+ */
+
+
+if ( isset( $_POST['page'] ) && $_POST['page'] == 'purchase_hitory' ) {
+    $search_parameter = $_POST['search']['value'] ?? null;
+    $order_by = $_POST['order'] ?? null;
+    $start =  $_POST['start'];
+    $length =  $_POST['length'];
+    $draw =  $_POST['draw'];
+    $di->get("purchase")->getJSONDataForDataTable($draw, $search_parameter, $order_by, $start, $length);
+}

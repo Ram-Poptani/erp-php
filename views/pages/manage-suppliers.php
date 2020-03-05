@@ -12,7 +12,7 @@ Util::createCSRFToken();
   <!--PLACE TO ADD YOUR CUSTOM CSS-->
   <link rel="stylesheet" href="<?=BASEASSETS;?>vendor/toastr/toastr.min.css">
   <!--DATATABLE CSS-->
-  <link href="<?= BASEASSETS; ?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="<?= BASEASSETS; ?>vendor/DataTables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 <body id="page-top">
   <!-- Page Wrapper -->

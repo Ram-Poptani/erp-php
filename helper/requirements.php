@@ -17,3 +17,4 @@ require_once "$app/../classes/Customer.php";
 require_once "$app/../classes/Supplier.php";
 require_once "$app/../classes/Employee.php";
 require_once "$app/../classes/Product.php";
+require_once "$app/../classes/Purchase.php";

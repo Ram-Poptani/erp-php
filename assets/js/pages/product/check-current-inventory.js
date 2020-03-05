@@ -92,6 +92,17 @@ var InventoryCharts = function(){
         var filePath = "/helper/routing.php";
 
         var oTable = $("#low-quantity-products-datatable").dataTable({
+            buttons: [
+                {
+                    extend: 'pdf',
+                    text: 'Save current page',
+                    exportOptions: {
+                        modifier: {
+                            page: 'current'
+                        }
+                    }
+                }
+            ],
             "processing": true,
             "serverSide": true,
             "ajax": {

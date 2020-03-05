@@ -1,5 +1,5 @@
 <script src="<?=BASEASSETS;?>vendor/toastr/toastr.min.js"></script>
-<script src="<?=BASEASSETS;?>vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="<?=BASEASSETS;?>vendor/DataTables/datatables.min.js"></script>
 <script src="<?=BASEASSETS;?>vendor/datatables/dataTables.bootstrap4.min.js"></script>
 <script>
     toastr.options = {
