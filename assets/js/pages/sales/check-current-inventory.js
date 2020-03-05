@@ -19,6 +19,7 @@ var InventoryCharts = function(){
             },
             success: function (data_for_chart) {
                 data_for_chart = JSON.parse( data_for_chart );
+                // console.log( data_for_chart );
                 let quantities = [];
                 let names = [];
                 data_for_chart.forEach(pie => {
@@ -90,7 +91,18 @@ var InventoryCharts = function(){
         var baseURL = window.location.origin;
         var filePath = "/helper/routing.php";
 
-        var oTable = $("#low-quantity-products-datatable").DataTable({
+        var oTable = $("#low-quantity-products-datatable").dataTable({
+            buttons: [
+                {
+                    extend: 'pdf',
+                    text: 'Save current page',
+                    exportOptions: {
+                        modifier: {
+                            page: 'current'
+                        }
+                    }
+                }
+            ],
             "processing": true,
             "serverSide": true,
             "ajax": {
@@ -113,14 +125,6 @@ var InventoryCharts = function(){
                 'targets': [0, 1]
             }],
         });
-        new $.fn.dataTable.Buttons( oTable, {
-            buttons: [
-                'copy', 'excel', 'pdf'
-            ]
-        } );
-        // oTable.buttons().container().appendTo(oTable.table().container());
-        // console.log(oTable.buttons().container());        
-        oTable.buttons().container().appendTo( $("#dt-buttons") );
     }
 
     return{

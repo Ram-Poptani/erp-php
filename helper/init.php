@@ -16,6 +16,7 @@ $di->set("supplier", new Supplier($di));
 $di->set("employee", new Employee($di));
 $di->set("product", new Product($di));
 $di->set("purchase", new Purchase($di));
+$di->set("sales", new Sale($di));
 
 
 require_once "constants.php";

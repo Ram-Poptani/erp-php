@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../../helper/init.php';
-$pageTitle = "Easy ERP | Purchase history";
+$pageTitle = "Quick ERP | Purchase history";
 $sidebarSection = "reports";
 $sidebarSubSection = "purchase-history";
 Util::createCSRFToken();
@@ -12,7 +12,7 @@ Util::createCSRFToken();
   <!--PLACE TO ADD YOUR CUSTOM CSS-->
   <link rel="stylesheet" href="<?=BASEASSETS;?>vendor/toastr/toastr.min.css">
   <!--DATATABLE BUTTONS CSS-->
-  <link href="<?= BASEASSETS; ?>vendor/DataTables1/Buttons-1.6.1/css/buttons.bootstrap4.min.css" rel="stylesheet">
+  <link href="<?= BASEASSETS; ?>vendor/DataTables/Buttons-1.6.1/css/buttons.bootstrap4.min.css" rel="stylesheet">
   <!--DATATABLE CSS-->
   <link href="<?= BASEASSETS; ?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>

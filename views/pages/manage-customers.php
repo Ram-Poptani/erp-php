@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../../helper/init.php';
-$pageTitle = "Easy ERP | Manage Customer";
+$pageTitle = "Quick ERP | Manage Customer";
 $sidebarSection = "customer";
 $sidebarSubSection = "manage";
 Util::createCSRFToken();

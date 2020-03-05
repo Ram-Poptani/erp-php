@@ -1,7 +1,8 @@
+
 <script src="<?=BASEASSETS;?>vendor/toastr/toastr.min.js"></script>
-<script src="<?=BASEASSETS;?>vendor/DataTables/Buttons-1.6.1/js/buttons.bootstrap4.min.js"></script>
 <script src="<?=BASEASSETS;?>vendor/DataTables/datatables.min.js"></script>
-<script src="<?=BASEASSETS;?>vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="<?=BASEASSETS;?>vendor/DataTables/dataTables.bootstrap4.min.js"></script>
+<script src="<?=BASEASSETS;?>vendor/DataTables/Buttons-1.6.1/js/buttons.bootstrap4.min.js"></script>
 <script>
     toastr.options = {
         "closeButton": true,
@@ -68,4 +69,4 @@
 
 </script>
 
-<script src="<?=BASEASSETS;?>js/pages/purchase/purchase-history.js"></script>
+<script src="<?=BASEASSETS;?>js/pages/sales/sales-report.js"></script>

@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../../helper/init.php';
-$pageTitle = "Easy ERP | Check Current Inventory";
+$pageTitle = "Quick ERP | Current Inventory";
 $sidebarSection = "products";
 $sidebarSubSection = "current_inventory";
 Util::createCSRFToken();
@@ -12,7 +12,7 @@ Util::createCSRFToken();
   <!--PLACE TO ADD YOUR CUSTOM CSS-->
   <link rel="stylesheet" href="<?=BASEASSETS;?>vendor/toastr/toastr.min.css">
   <!--DATATABLE BUTTONS CSS-->
-  <link href="<?= BASEASSETS; ?>vendor/DataTables1/Buttons-1.6.1/css/buttons.bootstrap4.min.css" rel="stylesheet">
+  <link href="<?= BASEASSETS; ?>vendor/DataTables/Buttons-1.6.1/css/buttons.bootstrap4.min.css" rel="stylesheet">
   <!--DATATABLE CSS-->
   <link href="<?= BASEASSETS; ?>vendor/DataTables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
@@ -29,9 +29,10 @@ Util::createCSRFToken();
         <div class="container-fluid">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Inventory</h1>
-            <a href="<?= BASEPAGES;?>add-product.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <div id="dt-buttons"></div>
+            <!-- <a href="add-product.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
               <i class="fa fa-plus fa-sm text-white-75"></i> Add Product
-            </a>
+            </a> -->
         </div>
           <!--
           

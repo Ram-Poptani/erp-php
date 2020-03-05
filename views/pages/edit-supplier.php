@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../../helper/init.php';
-$pageTitle = "Easy ERP | Edit Supplier";
+$pageTitle = "Quick ERP | Edit Supplier";
 Util::createCSRFToken();
 $errors = "";
 if(Session::hasSession('errors'))
