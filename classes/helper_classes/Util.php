@@ -10,23 +10,23 @@ class Util
         self::$baseUrl = $this->di->get('config')->get('base_url');
     }
 
-    public static function dd($var = ""){
+    public static function dd($var = "") {
         die(var_dump($var));
     }
 
-    public static function redirect($filepath){
+    public static function redirect($filepath) {
         // echo "($this->di->get('config')->get('base_url') . "views/pages/$filepath)";
         // header('Location: ' . ($this->di->get('config')->get('base_url') . "views/pages/$filepath"));
         header('Location: ' . (self::$baseUrl) . "views/pages/$filepath");
     }
 
     // CSRF = Cross Site Request Forgery
-    public static function createCSRFToken(){
+    public static function createCSRFToken() {
         Session::setSession('csrf_token', uniqid().rand());
         Session::setSession('token_expire', time()+3600);
     }
 
-    public static function verifyCSRFToken($data){
+    public static function verifyCSRFToken($data) {
 
         // Util::dd( [
         //     $data, 

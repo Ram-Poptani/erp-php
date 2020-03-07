@@ -60,6 +60,7 @@ Util::createCSRFToken();
                       <th>Discount</th>
                       <th>Sold On</th>
                       <th>Sold to</th>
+                      <th>View Bill</th>
                     </tr>
                   </thead>
                 </table>

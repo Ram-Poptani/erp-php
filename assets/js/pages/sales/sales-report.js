@@ -4,12 +4,9 @@ var TableDataTables = function(){
         $("#accordionSidebar").removeClass('toggled');
         
 
-
-        var manageSalesReport = $("#sales-datatable");
-        // console.log( manageSalesReport );        
         var baseURL = window.location.origin;
         var filePath = "/helper/routing.php";
-        var oTable = manageSalesReport.dataTable({
+        var oTable = $("#sales-datatable").DataTable({
             "processing": true,
             "serverSide": true,
             "ajax": {
@@ -36,9 +33,7 @@ var TableDataTables = function(){
                 'copy', 'excel', 'pdf'
             ]
         });
-        // console.log( oTable.buttons() );        
-        oTable.buttons().container().appendTo(oTable.table().container());
-        // oTable.buttons().container().appendTo( $("#dt-buttons") );
+        oTable.buttons().container().appendTo( $("#dt-buttons") );
     }
 
     return{

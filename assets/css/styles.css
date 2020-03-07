@@ -25,3 +25,8 @@
 .d-block{
     display: block !important; 
 }
+
+#dt-buttons button{
+    background-color: #375A7F !important;
+    color: #FFF !important;
+}

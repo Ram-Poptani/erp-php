@@ -11,7 +11,7 @@ class Sale {
         $this->di = $di;
         $this->database = $this->di->get('database');
     }
-    
+    /*
     private function validateData($data) {
         $validator = $this->di->get('validator');
         return $validator->check($data, [
@@ -44,9 +44,12 @@ class Sale {
             ]
         ]);
     }
+    */
     /**
-     * This function is responsible to accept the data from the Routing and add it to the Database.
+     * 
      */
+    /*
+            This function is responsible to accept the data from the Routing and add it to the Database.
     public function addSale($data) {
         // Util::dd( $data );
         $validation = $this->validateData($data);
@@ -100,6 +103,7 @@ class Sale {
             return VALIDATION_ERROR;
         }
     }
+    */
 
     public function getJSONDataForDataTable($draw, $searchParameter, $orderBy, $start, $length) {
         
@@ -181,7 +185,6 @@ class Sale {
         }else {
             $query .= " ORDER BY {$columns[3]} ASC";
         }
-
         if ($length != -1) {
             $query .= " LIMIT {$start}, {$length}";
         }
@@ -206,20 +209,14 @@ class Sale {
             $subarray[] = $filteredData[$i]->sold_on;
             $subarray[] = $filteredData[$i]->sold_to;
             $baseurl = BASEPAGES;
-            // $subarray[] = 
-            // <<<BUTTONS
-            // <div class= "d-flex">
-            //     <button class="edit btn btn-outline-primary" id="{$filteredData[$i]->id}">
-            //         <i class="fas fa-pencil-alt"></i>
-            //     </button>
-            //     <button class="delete btn btn-outline-danger" id="{$filteredData[$i]->id}" data-toggle = "modal" data-target = "#deleteModal">
-            //         <i class="fas fa-trash"></i>
-            //     </button>
-            //     <button class="view btn btn-outline-success" id="{$filteredData[$i]->id}">
-            //         <i class="fas fa-eye"></i>
-            //     </button>
-            // <div>
-            // BUTTONS;
+            $subarray[] = 
+            <<<BUTTONS
+            <div>
+                <button class="view btn btn-outline-primary" id="{$filteredData[$i]->id}">
+                    <i class="fas fa-eye"></i>
+                </button>
+            <div>
+            BUTTONS;
 
             $data[] = $subarray;
         }
@@ -235,79 +232,6 @@ class Sale {
     }
 
 
-    public function getJSONDataForQuantityTable($draw, $searchParameter, $orderBy, $start, $length) {
-        
-        $columns = ["name", "quantity"];
-
-        $totalRowCountQuery = "SELECT COUNT(id) as total_count FROM {$this->table} WHERE deleted = 0";
-
-        // Util::dd($totalRowCountQuery);
-
-        $filteredRowCountQuery = "SELECT COUNT(`{$this->table}`.id) AS filtered_total_count FROM `{$this->table}`, `category` WHERE `{$this->table}`.category_id = `category`.id  AND  `{$this->table}`.deleted = 0";
-
-        // Util::dd($filteredRowCountQuery);
-
-        $query = "
-            SELECT 
-                `{$this->table}`.id, 
-                `{$this->table}`.name, 
-                `{$this->table}`.quantity 
-            FROM 
-                `{$this->table}` 
-            WHERE 
-                `{$this->table}`.deleted = 0 ";
-        
-        // Util::dd($query);
-
-        if($searchParameter != null){
-
-            $query .= " AND 
-                `{$this->table}`.name 
-                LIKE '%$searchParameter%'";
-                
-            $filteredRowCountQuery .= " AND 
-            `{$this->table}`.name 
-            LIKE '%$searchParameter%'";
-        }   
-        if ($orderBy != null) {
-            $query .= " ORDER BY {$columns[$orderBy[0]['column']]} {$orderBy[0]['dir']}";
-        }else {
-            $query .= " ORDER BY {$columns[1]} ASC";
-        }
-
-        if ($length != -1) {
-            $query .= " LIMIT {$start}, {$length}";
-        }
-        
-        // Util::dd($query);
-
-        $totalRowCountResult = $this->database->raw($totalRowCountQuery);
-        $numberOfTotalRows = is_array($totalRowCountResult) ? $totalRowCountResult[0]->total_count : 0;
-
-        $filteredRowCountResult = $this->database->raw($filteredRowCountQuery);
-        $numberOfFilteredRows = is_array($filteredRowCountResult) ? $filteredRowCountResult[0]->filtered_total_count : 0;
-
-        $filteredData = $this->database->raw($query);
-        // Util::dd( $filteredData );
-        $numberOfRowsToDisplay = is_array($filteredData) ? count($filteredData) : 0;
-        $data = [];
-        for ($i=0; $i < $numberOfRowsToDisplay; $i++) { 
-            $subarray = [];
-            $subarray[] = $filteredData[$i]->name;
-            $subarray[] = $filteredData[$i]->quantity;
-
-            $data[] = $subarray;
-        }
-
-        $output = [
-            "draw" => $draw,
-            "recordsTotal" => $numberOfTotalRows,
-            "recordsFiltered" => $numberOfFilteredRows,
-            "data" => $data
-        ];
-
-        echo json_encode($output);
-    }
 
     public function getJSONDataForChart( $lowestQuantity = true, $sections = 5 ) {
 
@@ -337,37 +261,9 @@ class Sale {
         return $filteredData;
     }
 
-    public function getSaleWithCategory($id, $readMode = PDO::FETCH_OBJ) {
 
-        $query = "
-            SELECT 
-                `{$this->table}`.id, 
-                `{$this->table}`.name, 
-                `{$this->table}`.specification, 
-                `{$this->table}`.quantity,  
-                `{$this->table}`.danger_level,  
-                `{$this->table}`.eoq_level, 
-                `category`.name AS 'category_name'
-            FROM 
-                `{$this->table}`, `category` 
-            WHERE 
-                `{$this->table}`.category_id = `category`.id 
-                    AND 
-                `{$this->table}`.deleted = 0
-                    AND
-                `category`.deleted = 0
-                    AND
-                `{this->table}`.id = $id";
-
-        $filteredData = $this->database->raw($query, $readMode);
-        
-        // Util::dd($filteredData);
-
-        echo json_encode($filteredData);
-    }
-
-    public function getSaleById($purchaseId, $mode = PDO::FETCH_OBJ) {
-        $query = "SELECT * FROM {$this->table} WHERE deleted = 0 AND id = {$purchaseId}";
+    public function getSaleById($saleId, $mode = PDO::FETCH_OBJ) {
+        $query = "SELECT * FROM {$this->table} WHERE deleted = 0 AND id = {$saleId}";
         $result = $this->database->raw($query, $mode);
         return $result;
     }
